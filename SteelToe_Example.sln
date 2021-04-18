@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteelToe_Example", "SteelToe_Example\SteelToe_Example.csproj", "{B8982776-8FC5-4541-9A96-FBFCE979E425}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteelToe", "SteelToe\SteelToe.csproj", "{4F503A16-9F2B-4B0E-B8EA-9737DC589E58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{B8982776-8FC5-4541-9A96-FBFCE979E425}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8982776-8FC5-4541-9A96-FBFCE979E425}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8982776-8FC5-4541-9A96-FBFCE979E425}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F503A16-9F2B-4B0E-B8EA-9737DC589E58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F503A16-9F2B-4B0E-B8EA-9737DC589E58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F503A16-9F2B-4B0E-B8EA-9737DC589E58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F503A16-9F2B-4B0E-B8EA-9737DC589E58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
