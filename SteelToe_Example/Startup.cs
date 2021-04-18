@@ -1,10 +1,13 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using SteelToe;
+using SteelToe.Models;
 
 namespace SteelToe_Example
 {
@@ -18,10 +21,10 @@ namespace SteelToe_Example
         private IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public static void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSteelToe();
+            services.AddSteelToe(Configuration);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "SteelToe_Example", Version = "v1"});
@@ -29,7 +32,7 @@ namespace SteelToe_Example
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
@@ -37,6 +40,9 @@ namespace SteelToe_Example
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SteelToe_Example v1"));
             }
+
+            var root = (IConfigurationRoot)Configuration;
+            logger.LogWarning(root.GetDebugView());
 
             app.UseHttpsRedirection();
 

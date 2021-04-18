@@ -12,6 +12,7 @@
 
     <ItemGroup>
       <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="3.0.2" />
+      <PackageReference Include="Steeltoe.Management.EndpointCore" Version="3.0.2" />
     </ItemGroup>
 
 </Project>

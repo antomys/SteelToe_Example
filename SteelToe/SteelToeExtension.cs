@@ -1,17 +1,22 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Steeltoe.Extensions.Configuration.ConfigServer;
+using Steeltoe.Management.Endpoint;
 
 namespace SteelToe
 {
     public static class SteelToeExtension
     {
-        public static IServiceCollection AddSteelToe(this IServiceCollection collection)
+        public static IHostBuilder AddSteelToe(this IHostBuilder provider)
         {
-            if (collection == null) throw new ArgumentNullException(nameof(collection));
+            if (provider == null) throw new ArgumentNullException(nameof(provider));
 
-            collection.AddSteelToe();
+            provider
+                .AddRefreshActuator()
+                .AddConfigServer();
 
-            return collection;
+            return provider;
         }
     }
 }
