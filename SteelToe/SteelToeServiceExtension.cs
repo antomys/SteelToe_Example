@@ -12,7 +12,7 @@ namespace SteelToe
         {
             if (service == null) throw new ArgumentNullException(nameof(service));
             service.Configure<Templates>(configuration.GetSection("Templates"))
-                .AddHttpClient<IWeatherService,WeatherService>();
+                .AddSingleton<IWeatherService,WeatherService>();
             return service;
         }
     }

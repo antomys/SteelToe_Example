@@ -1,28 +1,29 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Net.Http.Headers;
 using SteelToe.Models;
+using CacheControlHeaderValue = System.Net.Http.Headers.CacheControlHeaderValue;
 
 namespace SteelToe.Services
 {
     public class WeatherService: IWeatherService
     {
         private readonly HttpClient _client;
-        private readonly ILogger<WeatherService> _logger;
         private readonly Templates _templates;
 
         public WeatherService(
-            HttpClient client, 
-            IOptionsSnapshot<Templates> templates,
-            ILogger<WeatherService> logger)
+            IOptionsSnapshot<Templates> templates, 
+            HttpClient client)
         {
             _client = client ?? throw new ArgumentNullException(nameof(client));
-            _logger = logger;
+            if (_client.DefaultRequestHeaders.CacheControl != null)
+                _client.DefaultRequestHeaders.CacheControl.NoCache = true;
+            
             _templates = templates.Value ?? throw new ArgumentNullException(nameof(templates));
         }
-
+        
         public async Task<string> GetSettingWeather()
         {
             return await _client.GetStringAsync(_templates.Weather);
