@@ -12,8 +12,7 @@ namespace SteelToe
         {
             if (service == null) throw new ArgumentNullException(nameof(service));
             service.Configure<Templates>(configuration.GetSection("Templates"))
-                .AddHttpClient<IWeatherService,WeatherService>()
-                .ConfigureHttpClient(client =>
+                .AddHttpClient<IWeatherService,WeatherService>(client =>
                 {
                     if (client.DefaultRequestHeaders.CacheControl != null)
                         client.DefaultRequestHeaders.CacheControl.NoCache = true;
