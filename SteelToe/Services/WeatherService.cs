@@ -18,9 +18,6 @@ namespace SteelToe.Services
             HttpClient client)
         {
             _client = client ?? throw new ArgumentNullException(nameof(client));
-            if (_client.DefaultRequestHeaders.CacheControl != null)
-                _client.DefaultRequestHeaders.CacheControl.NoCache = true;
-            
             _templates = templates.Value ?? throw new ArgumentNullException(nameof(templates));
         }
         
