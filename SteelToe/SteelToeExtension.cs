@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Steeltoe.Extensions.Configuration.ConfigServer;
 using Steeltoe.Management.Endpoint;
@@ -12,8 +13,14 @@ namespace SteelToe
             if (provider == null) throw new ArgumentNullException(nameof(provider));
 
             provider
-                .AddRefreshActuator()
-                .AddConfigServer();
+                .ConfigureAppConfiguration((context, builder) =>
+                {
+                    var env = context.HostingEnvironment.EnvironmentName;
+                    builder
+                        .AddConfigServer(env)
+                        .AddEnvironmentVariables();
+                })
+                .AddRefreshActuator();
 
             return provider;
         }
